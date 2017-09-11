@@ -12,17 +12,23 @@ import SVProgressHUD
 
 class SignInViewController: UIViewController {
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var txt_Email: UITextField!
     @IBOutlet weak var txt_password: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        txt_Email.delegate = self
+        txt_password.delegate = self
+        
+        createTapGestureScrollview(withscrollview: scrollView)
+        
         // Do any additional setup after loading the view.
     }
 
         
     @IBAction func signInAction(_ sender: Any) {
-        
+        self.view.endEditing(true)
         SVProgressHUD.show(withStatus: "Sign in...")
         DispatchQueue.global(qos: .default).async { 
             Auth.auth().signIn(withEmail: self.txt_Email.text!, password: self.txt_password.text!) { (userinfo, error) in
@@ -47,10 +53,10 @@ class SignInViewController: UIViewController {
                         let fullname = user_curr.displayName
                         let avatarLink = user_curr.photoURL
                         
-                         let currentUser = User(id: uid, email: email!, fullname: fullname!, linkAvatar: "\(avatarLink!)")
-                        UserDefaults.standard.set(currentUser, forKey: "currentUser")
-                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                        UserDefaults.standard.synchronize()
+                        currentUser = User(id: uid, email: email!, fullname: fullname!, linkAvatar: "\(avatarLink!)")
+//                        UserDefaults.standard.set(currentUser, forKey: "currentUser")
+//                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+//                        UserDefaults.standard.synchronize()
                     }
                     
                     DispatchQueue.main.async(execute: {
@@ -83,3 +89,34 @@ class SignInViewController: UIViewController {
     */
 
 }
+
+
+extension SignInViewController: UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField.tag {
+            
+        case 1:
+            txt_password.becomeFirstResponder()
+            
+        default:
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 50), animated: true)
+        
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+}
+
+
+
+
+

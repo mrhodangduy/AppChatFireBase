@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SDWebImage
 
 class HomeViewController: UIViewController {
     
@@ -22,15 +23,17 @@ class HomeViewController: UIViewController {
         
         listFriendTableView.delegate = self
         listFriendTableView.dataSource = self
+        listFriendTableView.separatorStyle = .none
+        listFriendTableView.tableFooterView = UIView(frame: .zero)
         
         lbl_myName.text = currentUser.fullname
-        img_myAvatar.loadAvatar(link: currentUser.linkavatar)
+        img_myAvatar.sd_setImage(with: URL( string: currentUser.linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: SDWebImageOptions.continueInBackground, completed: nil)
         
         getAllUser()
         
         // Do any additional setup after loading the view.
     }
-    
+        
     func getAllUser()
     {
         
@@ -60,9 +63,9 @@ class HomeViewController: UIViewController {
         do
         {
             try Auth.auth().signOut()
-            UserDefaults.standard.removeObject(forKey: "currentUser")
-            UserDefaults.standard.set(false, forKey: "isLoggedIn")
-            UserDefaults.standard.synchronize()
+//            UserDefaults.standard.removeObject(forKey: "currentUser")
+//            UserDefaults.standard.set(false, forKey: "isLoggedIn")
+//            UserDefaults.standard.synchronize()
             
         }
         catch
@@ -102,7 +105,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListFriends_TableViewCell
         
         cell.lbl_friendName.text = listUser[indexPath.row].fullname
-        cell.img_avatarFriend.loadAvatar(link: listUser[indexPath.row].linkavatar)
+        cell.img_avatarFriend.sd_setImage(with: URL( string: listUser[indexPath.row].linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: SDWebImageOptions.continueInBackground, completed: nil)
         
         return cell
     }
@@ -113,12 +116,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         visitor = listUser[indexPath.row]
         
         let chatVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatVC")
         
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
+    
+    
 
 }
 

@@ -19,6 +19,7 @@ var currentUser:User!
 var visitor:User!
 
 class SignUpViewController: UIViewController {
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var txt_Name: UITextField!
     @IBOutlet weak var txt_Email: UITextField!
@@ -32,6 +33,13 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         imgData = UIImageJPEGRepresentation(#imageLiteral(resourceName: "avatar"), 1.0)
+        createTapGestureScrollview(withscrollview: scrollView)
+        
+        
+        txt_Name.delegate = self
+        txt_Email.delegate = self
+        txt_Password.delegate = self
+        txt_RetypePass.delegate = self
         
         // Do any additional setup after loading the view.
     }
@@ -82,7 +90,7 @@ class SignUpViewController: UIViewController {
         alertChooseAvatar()
     }
     @IBAction func signUpAction(_ sender: Any) {
-        
+        self.view.endEditing(true)
         signUpUser(txt_Email.text!, txt_Password.text!)
     }
     
@@ -173,10 +181,7 @@ class SignUpViewController: UIViewController {
                                                     let user: [String:String] = ["email":currentUser.email,"fullname":currentUser.fullname,"avatarLink":currentUser.linkavatar]
                                                     
                                                     userid.setValue(user)
-                                                    UserDefaults.standard.set(currentUser, forKey: "currentUser")
-                                                    UserDefaults.standard.set(true, forKey: "isLoggedIn")
-                                                    UserDefaults.standard.synchronize()
-                                                    
+                                                                                                        
                                                     SVProgressHUD.dismiss()
                                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                                                     self.gotoHome()
@@ -242,4 +247,50 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
         
     }
 }
+
+
+extension SignUpViewController: UITextFieldDelegate
+{
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        switch textField.tag {
+        case 1:
+            txt_Email.becomeFirstResponder()
+        case 2:
+            txt_Password.becomeFirstResponder()
+        case 3:
+            txt_RetypePass.becomeFirstResponder()
+        default:
+            textField.resignFirstResponder()
+        }
+        
+        return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        switch textField.tag {
+        case 1:
+            return
+        case 2:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 20), animated: true)
+        case 3:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 30), animated: true)
+        default:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 80), animated: true)
+        }
+        
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    }
+}
+
+
+
+
+
+
+
+
+
 

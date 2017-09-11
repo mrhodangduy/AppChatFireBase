@@ -19,13 +19,16 @@ class ChatScreenViewController: UIViewController {
     var tableName:DatabaseReference!
     var arrtxtChat:Array<String> = Array<String>()
     var arruserChat: Array<User> = Array<User>()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
+        chatTableView.estimatedRowHeight = 50
+        chatTableView.rowHeight = UITableViewAutomaticDimension
+        
         txt_Mess.delegate = self
         
         arrIDChat.append(currentUser.id)
@@ -54,11 +57,16 @@ class ChatScreenViewController: UIViewController {
             }
         })
         
+        self.navigationItem.title = visitor.fullname
+        
         showHideKeyboard()
         
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        chatTableView.scrollToBottom(animated: true)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,13 +80,14 @@ class ChatScreenViewController: UIViewController {
         let mess:Dictionary<String,String> = ["id": currentUser.id, "message": txt_Mess.text!]
         tableName.childByAutoId().setValue(mess)
         txt_Mess.text = ""
+        chatTableView.scrollToBottom(animated: true)
         
         if (arrtxtChat.count == 0)
         {
             addListChat(user1: currentUser, user2: visitor)
             addListChat(user1: visitor, user2: currentUser)
         }
-
+        
     }
     
     func addListChat(user1:User, user2:User)
@@ -111,18 +120,18 @@ class ChatScreenViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
-
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension ChatScreenViewController: UITableViewDataSource, UITableViewDelegate
@@ -134,16 +143,16 @@ extension ChatScreenViewController: UITableViewDataSource, UITableViewDelegate
         
         if currentUser.id == arruserChat[indexPath.row].id
         {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! Own_TableViewCell            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! Own_TableViewCell
             cell.lbl_OwnMess.text = arrtxtChat[indexPath.row]
-            cell.img_Own.loadAvatar(link: currentUser.linkavatar)
+            cell.img_Own.sd_setImage(with: URL(string: currentUser.linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: .continueInBackground, completed: nil)
             return cell
         }
         else
         {
             let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath) as! Visitor_TableViewCell
             cell.lbl_VisitorMess.text = arrtxtChat[indexPath.row]
-            cell.img_Visitor.loadAvatar(link: visitor.linkavatar)
+            cell.img_Visitor.sd_setImage(with: URL(string:visitor.linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: .continueInBackground, completed: nil)
             return cell
         }
         

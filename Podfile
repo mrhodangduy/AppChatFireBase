@@ -11,7 +11,5 @@ target 'AppChatFirebase' do
     pod ‘Firebase/Auth’
     pod 'Firebase/Storage'
     pod "SVProgressHUD", :git => 'https://github.com/SVProgressHUD/SVProgressHUD.git'
-
-
-
+    pod 'SDWebImage', '~> 4.0’
 end

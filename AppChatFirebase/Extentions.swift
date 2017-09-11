@@ -9,6 +9,13 @@
 import Foundation
 import UIKit
 
+extension UITableView {
+    func scrollToBottom(animated: Bool) {
+        let y = contentSize.height - frame.size.height
+        setContentOffset(CGPoint(x: 0, y: (y<0) ? 0 : y), animated: animated)
+    }
+}
+
 extension UIViewController
 {
     func alertMissingText(mess: String, textField: UITextField?)
@@ -66,6 +73,18 @@ extension UIViewController
     {
         let SignInVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signinVC") as! SignInViewController
         self.present(SignInVC, animated: false, completion: nil)  
+    }
+    
+    func tapToClose()
+    {
+        view.endEditing(true)
+    }
+    
+    func createTapGestureScrollview(withscrollview scrollView:UIScrollView)
+    {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(UIViewController.tapToClose))
+        
+        scrollView.addGestureRecognizer(tapGesture)
     }
     
 }
