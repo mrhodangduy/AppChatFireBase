@@ -17,7 +17,8 @@ class Navi_ViewController: UINavigationController {
         self.navigationBar.tintColor = .white
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        
+        self.navigationItem.backBarButtonItem?.title = ""
+        self.navigationBar.backItem?.title = "'"
         // Do any additional setup after loading the view.
     }
 

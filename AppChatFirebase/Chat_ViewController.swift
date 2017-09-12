@@ -24,7 +24,7 @@ final class Chat_ViewController: JSQMessagesViewController {
     private var newMessageRefHandle: DatabaseHandle?
     private var updatedMessageRefHandle: DatabaseHandle?
     var key:String?
-
+    
     
     private let imageURLNotSetKey = "NOTSET"
     private var photoMessageMap = [String: JSQPhotoMediaItem]()
@@ -112,15 +112,18 @@ final class Chat_ViewController: JSQMessagesViewController {
     }
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
-            picker.sourceType = UIImagePickerControllerSourceType.camera
-        } else {
-            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-        }
+//        let picker = UIImagePickerController()
+//        picker.delegate = self
+//        if (UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera)) {
+//            picker.sourceType = UIImagePickerControllerSourceType.camera
+//        } else {
+//            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+//        }
+//        
+//        present(picker, animated: true, completion:nil)
         
-        present(picker, animated: true, completion:nil)
+        displayAlert(title: nil, mess: nil, type: .actionSheet)
+        
     }
     
     private func observeTyping() {
@@ -206,7 +209,7 @@ final class Chat_ViewController: JSQMessagesViewController {
     
     private func setupOutgoingBubble() -> JSQMessagesBubbleImage {
         let bubbleImageFactory = JSQMessagesBubbleImageFactory()
-        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
+        return bubbleImageFactory!.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleGreen() )
     }
     
     private func setupIncomingBubble() -> JSQMessagesBubbleImage {
@@ -288,6 +291,7 @@ final class Chat_ViewController: JSQMessagesViewController {
                 
                 // 4
                 if (metadata?.contentType == "image/gif") {
+
                     mediaItem.image = UIImage.sd_animatedGIF(with: data!)
                 } else {
                     mediaItem.image = UIImage.init(data: data!)
@@ -302,6 +306,51 @@ final class Chat_ViewController: JSQMessagesViewController {
             })
         }
     }
+    
+    
+    func displayAlert(title: String?, mess: String?, type: UIAlertControllerStyle)
+    {
+        let alert = UIAlertController(title: title, message: mess, preferredStyle: type)
+        let btnPhoto  = UIAlertAction(title: "Take a Picture", style: .default) { (action) in
+            
+            print("Take a Picture")
+            
+            if UIImagePickerController.isSourceTypeAvailable(.camera)
+            {
+                self.getPhotoFrom(type: .camera)
+            }
+            else
+            {
+                print("Camera isnot available")
+            }
+            
+            
+        }
+        let btnLib  = UIAlertAction(title: "Select from Library", style: .default) { (action) in
+            
+            print("Select from Library")
+            self.getPhotoFrom(type: .photoLibrary)
+            
+        }
+        
+        let btnCan = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(btnPhoto)
+        alert.addAction(btnLib)
+        alert.addAction(btnCan)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func getPhotoFrom(type: UIImagePickerControllerSourceType)
+        
+    {
+        let imagePicker = UIImagePickerController()
+        imagePicker.sourceType = type
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
 }
 // MARK: Image Picker Delegate
 extension Chat_ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -364,10 +413,8 @@ extension Chat_ViewController: UIImagePickerControllerDelegate, UINavigationCont
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             picker.dismiss(animated: true, completion:nil)
         }
-}
-
-
-
+    }
+    
 }
 
 

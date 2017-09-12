@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -437,6 +437,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="U8W-YV-YTK">
+                        <barButtonItem key="backBarButtonItem" title=" " id="uBW-Wg-Ewp"/>
                         <barButtonItem key="rightBarButtonItem" title="Sign Out" id="Alt-uS-DCW">
                             <connections>
                                 <action selector="signOutAction:" destination="yFb-ch-9Ik" id="gsS-ab-3A8"/>
@@ -999,10 +1000,10 @@
             </objects>
             <point key="canvasLocation" x="3382" y="34"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Navi View Controller-->
         <scene sceneID="zQq-gm-3CV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UV3-N8-oV3" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UV3-N8-oV3" customClass="Navi_ViewController" customModule="AppChatFirebase" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xmb-tV-twR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

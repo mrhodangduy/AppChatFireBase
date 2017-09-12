@@ -46,16 +46,11 @@ class HomeViewController: UIViewController {
         
         lbl_myName.text = currentUser.fullname + " - (Me)"
         img_myAvatar.sd_setImage(with: URL( string: currentUser.linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: SDWebImageOptions.continueInBackground, completed: nil)
+        
         getAllUser()
+        
         onlineStatusMe.text = "Online"
         ref.child("ListUser").keepSynced(true)
-        
-        Auth.auth().addStateDidChangeListener { (auth, user) in
-            
-            guard let user = user else { return }
-            print(user)
-            
-        }
         
         checkchangeUser()
         
@@ -71,8 +66,7 @@ class HomeViewController: UIViewController {
             let postDict = snapShot.value as? [String: AnyObject]
             if postDict != nil
             {
-                print("PostDict:\n\(postDict!)")
-                                
+                
                 let email = (postDict?["email"])! as! String
                 let fullname = (postDict?["fullname"])! as! String
                 let avatarLink = (postDict?["avatarLink"])! as! String
@@ -135,21 +129,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource
@@ -157,6 +136,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return listUser.count
     }
@@ -167,7 +147,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource
         let userinfo = listUser[indexPath.row]
         
         cell.lbl_friendName.text = userinfo.fullname
-        cell.img_avatarFriend.sd_setImage(with: URL( string: userinfo.linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: SDWebImageOptions.continueInBackground, completed: nil)
+        cell.img_avatarFriend.loadImageCachedWithUrlString(urlString:userinfo.linkavatar)
+//        cell.img_avatarFriend.sd_setImage(with: URL( string: userinfo.linkavatar), placeholderImage: #imageLiteral(resourceName: "avatar"), options: SDWebImageOptions.continueInBackground, completed: nil)
         if userinfo.online == "yes"
         {
             cell.onlineStatus.text = "Online"
