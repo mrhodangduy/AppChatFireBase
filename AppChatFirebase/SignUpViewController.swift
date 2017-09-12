@@ -13,9 +13,8 @@ import FirebaseAuth
 import SVProgressHUD
 
 let storage = Storage.storage()
-let storageRef = storage.reference(forURL: "gs://appchatfirebase-79670.appspot.com/")
+let storageRefer = storage.reference(forURL: "gs://appchatfirebase-79670.appspot.com/")
 var ref = Database.database().reference()
-var currentUser:User!
 var visitor:User!
 
 class SignUpViewController: UIViewController {
@@ -28,6 +27,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var img_Avatar: UIImageView!
     
     var imgData:Data?
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,7 +142,7 @@ class SignUpViewController: UIViewController {
                             
                             print((userinfo1?.email)!)
                             
-                            let avatarRef = storageRef.child("avatar/\(email).jpg")
+                            let avatarRef = storageRefer.child("avatar/\(email).jpg")
                             
                             let uploadtask = avatarRef.putData(self.imgData!, metadata: nil, completion: { (metadata, error) in
                                 if error != nil
@@ -153,8 +154,7 @@ class SignUpViewController: UIViewController {
                                     let downloadURL = metadata?.downloadURL()
                                     
                                     if let user_curr = Auth.auth().currentUser
-                                    {
-                                        
+                                    {                                        
                                         
                                         let changRequest = user_curr.createProfileChangeRequest()
                                         
@@ -167,25 +167,25 @@ class SignUpViewController: UIViewController {
                                             if error == nil
                                             {
                                                 
+                                                let uid = user_curr.uid
+                                                let name = user_curr.displayName
+                                                let email = user_curr.email
+                                                let avatarLink = user_curr.photoURL
+                                                let online = "yes"
+                                                
+                                                let currentUser = User(id: uid, email: email!, fullname: name!, linkAvatar: "\(avatarLink!)",online: online)
+                                                
+                                                let tableName = ref.child("ListUser")
+                                                let userid = tableName.child(currentUser.id)
+                                                let user: [String:String] = ["email":currentUser.email,"fullname":currentUser.fullname,"avatarLink":currentUser.linkavatar,"online": currentUser.online]
+                                                
+                                                userid.setValue(user)
                                                 DispatchQueue.main.async(execute: {
-                                                    
-                                                    let uid = user_curr.uid
-                                                    let name = user_curr.displayName
-                                                    let email = user_curr.email
-                                                    let avatarLink = user_curr.photoURL
-                                                    
-                                                    currentUser = User(id: uid, email: email!, fullname: name!, linkAvatar: "\(avatarLink!)")
-                                                    
-                                                    let tableName = ref.child("ListUser")
-                                                    let userid = tableName.child(currentUser.id)
-                                                    let user: [String:String] = ["email":currentUser.email,"fullname":currentUser.fullname,"avatarLink":currentUser.linkavatar]
-                                                    
-                                                    userid.setValue(user)
-                                                                                                        
                                                     SVProgressHUD.dismiss()
                                                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                                                    userDefault.set(true, forKey: "isloggedin")
+                                                    userDefault.set(currentUser.id, forKey: "currentuser")
                                                     self.gotoHome()
-                                                    
                                                 })
                                                 
                                             } else
@@ -284,13 +284,3 @@ extension SignUpViewController: UITextFieldDelegate
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
 }
-
-
-
-
-
-
-
-
-
-

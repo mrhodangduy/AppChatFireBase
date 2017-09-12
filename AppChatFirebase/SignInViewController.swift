@@ -11,13 +11,13 @@ import Firebase
 import SVProgressHUD
 
 class SignInViewController: UIViewController {
-
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var txt_Email: UITextField!
     @IBOutlet weak var txt_password: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         txt_Email.delegate = self
         txt_password.delegate = self
         
@@ -25,12 +25,12 @@ class SignInViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-
-        
+    
+    
     @IBAction func signInAction(_ sender: Any) {
         self.view.endEditing(true)
         SVProgressHUD.show(withStatus: "Sign in...")
-        DispatchQueue.global(qos: .default).async { 
+        DispatchQueue.global(qos: .default).async {
             Auth.auth().signIn(withEmail: self.txt_Email.text!, password: self.txt_password.text!) { (userinfo, error) in
                 
                 if error != nil
@@ -48,21 +48,25 @@ class SignInViewController: UIViewController {
                 {
                     if let user_curr = Auth.auth().currentUser
                     {
+                        print(user_curr)
                         let uid = user_curr.uid
                         let email = user_curr.email
                         let fullname = user_curr.displayName
                         let avatarLink = user_curr.photoURL
+                        let online = "yes"
                         
-                        currentUser = User(id: uid, email: email!, fullname: fullname!, linkAvatar: "\(avatarLink!)")
-//                        UserDefaults.standard.set(currentUser, forKey: "currentUser")
-//                        UserDefaults.standard.set(true, forKey: "isLoggedIn")
-//                        UserDefaults.standard.synchronize()
+                        let currentUser = User(id: uid, email: email!, fullname: fullname!, linkAvatar: "\(avatarLink!)",online : online)
+                        userDefault.set(true, forKey: "isloggedin")
+                        userDefault.set(currentUser.id, forKey: "currentuser")
+                        userDefault.synchronize()
+                        
+                        DispatchQueue.main.async(execute: {
+                            SVProgressHUD.dismiss()
+                            self.gotoHome()
+                        })
                     }
                     
-                    DispatchQueue.main.async(execute: {
-                        SVProgressHUD.dismiss()
-                        self.gotoHome()
-                    })
+                    
                 }
             }
         }
@@ -77,17 +81,17 @@ class SignInViewController: UIViewController {
         let signupVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "signupVC") as! SignUpViewController
         self.present(signupVC, animated: true, completion: nil)
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 

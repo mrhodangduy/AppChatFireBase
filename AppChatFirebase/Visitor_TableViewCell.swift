@@ -15,8 +15,7 @@ class Visitor_TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        lbl_VisitorMess.layer.cornerRadius = 5
-        lbl_VisitorMess.clipsToBounds = true
+       
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

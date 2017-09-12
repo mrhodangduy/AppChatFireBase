@@ -10,6 +10,8 @@ import UIKit
 
 class ListFriends_TableViewCell: UITableViewCell {
 
+    @IBOutlet weak var signStatus: RoundView!
+    @IBOutlet weak var onlineStatus: UILabel!
     @IBOutlet weak var img_avatarFriend: RoundImageView!
     @IBOutlet weak var lbl_friendName: UILabel!
     override func awakeFromNib() {

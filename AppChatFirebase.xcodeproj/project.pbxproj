@@ -24,6 +24,7 @@
 		636290411F66498C00134C29 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636290401F66498C00134C29 /* Extentions.swift */; };
 		636290431F664BBD00134C29 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 636290421F664BBD00134C29 /* GoogleService-Info.plist */; };
 		636290451F666F0400134C29 /* Navi_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636290441F666F0400134C29 /* Navi_ViewController.swift */; };
+		637460FF1F67D1B100E546D1 /* Chat_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637460FE1F67D1B100E546D1 /* Chat_ViewController.swift */; };
 		63EC85FE1F66739B00344E46 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC85FD1F66739B00344E46 /* Users.swift */; };
 		63EC86011F66751100344E46 /* ListFriends_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC86001F66751100344E46 /* ListFriends_TableViewCell.swift */; };
 		63EC86031F6694B800344E46 /* Visitor_TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EC86021F6694B800344E46 /* Visitor_TableViewCell.swift */; };
@@ -51,6 +52,8 @@
 		636290401F66498C00134C29 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
 		636290421F664BBD00134C29 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		636290441F666F0400134C29 /* Navi_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navi_ViewController.swift; sourceTree = "<group>"; };
+		637460FE1F67D1B100E546D1 /* Chat_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat_ViewController.swift; sourceTree = "<group>"; };
+		637461001F67EE0B00E546D1 /* AppChatFirebase.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AppChatFirebase.entitlements; sourceTree = "<group>"; };
 		63EC85FD1F66739B00344E46 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		63EC86001F66751100344E46 /* ListFriends_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListFriends_TableViewCell.swift; sourceTree = "<group>"; };
 		63EC86021F6694B800344E46 /* Visitor_TableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visitor_TableViewCell.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		6362901A1F6639A500134C29 /* AppChatFirebase */ = {
 			isa = PBXGroup;
 			children = (
+				637461001F67EE0B00E546D1 /* AppChatFirebase.entitlements */,
 				63EC85FF1F6674F900344E46 /* Views */,
 				636290371F66460F00134C29 /* Controllers */,
 				636290361F66460A00134C29 /* Model */,
@@ -145,6 +149,7 @@
 				6362903C1F66465F00134C29 /* HomeViewController.swift */,
 				6362903E1F66466800134C29 /* ChatScreenViewController.swift */,
 				636290441F666F0400134C29 /* Navi_ViewController.swift */,
+				637460FE1F67D1B100E546D1 /* Chat_ViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -205,6 +210,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = ETFZ2326V8;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -250,6 +260,8 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-AppChatFirebase/Pods-AppChatFirebase-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -259,6 +271,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -309,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				637460FF1F67D1B100E546D1 /* Chat_ViewController.swift in Sources */,
 				636290451F666F0400134C29 /* Navi_ViewController.swift in Sources */,
 				63EC86011F66751100344E46 /* ListFriends_TableViewCell.swift in Sources */,
 				6362903F1F66466800134C29 /* ChatScreenViewController.swift in Sources */,
@@ -451,6 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ETFZ2326V8;
 				INFOPLIST_FILE = AppChatFirebase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.detest.qtsvn.paul.AppChatFirebase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -466,6 +482,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ETFZ2326V8;
 				INFOPLIST_FILE = AppChatFirebase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.detest.qtsvn.paul.AppChatFirebase;
 				PRODUCT_NAME = "$(TARGET_NAME)";

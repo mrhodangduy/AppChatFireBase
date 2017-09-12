@@ -16,9 +16,7 @@ class Own_TableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        lbl_OwnMess.layer.cornerRadius = 5
-        lbl_OwnMess.clipsToBounds = true
-    }
+            }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

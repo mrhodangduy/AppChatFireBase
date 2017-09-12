@@ -14,7 +14,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-AppChatFirebase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -47,7 +62,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>28FBB7F7FB9966FBEF09E4017FDC7664</key>
+		<key>44DED2E335651143F4929A8E6FE5903F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6668FE607232D23BB2847E678266B0E4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BCECF46D0BC8423600D3F0323785BC77</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +82,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
+		<key>C7DCF2B547F7871B9BFD74DE93B0E173</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F1B37AA88B7E2740AF86200BFB52959D</key>
+		<key>D0581AF7BF4A6DA140D280B19ECC7BFF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

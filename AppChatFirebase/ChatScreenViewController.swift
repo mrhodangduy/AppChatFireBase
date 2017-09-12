@@ -20,9 +20,22 @@ class ChatScreenViewController: UIViewController {
     var arrtxtChat:Array<String> = Array<String>()
     var arruserChat: Array<User> = Array<User>()
     
+    let currentUserID = userDefault.object(forKey: "currentuser") as! String
+    var currentUser = User()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let user_curr = Auth.auth().currentUser
+        if currentUserID == user_curr?.uid
+        {
+            let email = user_curr?.email
+            let name = user_curr?.displayName
+            let avatarLink = user_curr?.photoURL
+            
+            currentUser = User(id: currentUserID, email: email!, fullname: name!, linkAvatar: "\(avatarLink!)", online: "yes")
+        }
+
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
@@ -40,12 +53,11 @@ class ChatScreenViewController: UIViewController {
         
         tableName.observe(DataEventType.childAdded, with: { (snapshot) in
             let postDict = snapshot.value as? [String:AnyObject]
-            print(postDict!)
             if (postDict != nil)
             {
-                if (postDict?["id"] as! String == currentUser.id)
+                if (postDict?["id"] as! String == self.currentUser.id)
                 {
-                    self.arruserChat.append(currentUser)
+                    self.arruserChat.append(self.currentUser)
                 }
                 else
                 {
@@ -67,10 +79,14 @@ class ChatScreenViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         chatTableView.scrollToBottom(animated: true)
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        removeNotification()
     }
+    
+    @IBAction func sendImageAction(_ sender: Any) {
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -101,6 +117,11 @@ class ChatScreenViewController: UIViewController {
     {
         NotificationCenter.default.addObserver(self, selector: #selector(self.showKey(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(self.hideKey(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    func removeNotification()
+    {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func showKey(_ notification: Notification)
