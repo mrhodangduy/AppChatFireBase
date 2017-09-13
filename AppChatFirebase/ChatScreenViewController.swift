@@ -11,6 +11,7 @@ import Firebase
 
 class ChatScreenViewController: UIViewController {
     
+    
     @IBOutlet weak var bottonConstraint: NSLayoutConstraint!
     @IBOutlet weak var txt_Mess: RoundTextFiled!
     @IBOutlet weak var chatTableView: UITableView!
@@ -22,6 +23,7 @@ class ChatScreenViewController: UIViewController {
     
     let currentUserID = userDefault.object(forKey: "currentuser") as! String
     var currentUser = User()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +37,12 @@ class ChatScreenViewController: UIViewController {
             
             currentUser = User(id: currentUserID, email: email!, fullname: name!, linkAvatar: "\(avatarLink!)", online: "yes")
         }
-
         
         chatTableView.delegate = self
         chatTableView.dataSource = self
         chatTableView.estimatedRowHeight = 50
         chatTableView.rowHeight = UITableViewAutomaticDimension
+        
         
         txt_Mess.delegate = self
         
@@ -85,6 +87,10 @@ class ChatScreenViewController: UIViewController {
     }
     
     @IBAction func sendImageAction(_ sender: Any) {
+        
+        let searchVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "searchVC") as! SearchViewController
+        self.navigationController?.pushViewController(searchVC, animated: true)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -178,6 +184,10 @@ extension ChatScreenViewController: UITableViewDataSource, UITableViewDelegate
         }
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            }
+    
     
 }
 

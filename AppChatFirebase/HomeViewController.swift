@@ -178,7 +178,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource
         
         visitor = listUser[indexPath.row]
         
-        let chatVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatscrVC") as! Chat_ViewController
+        let chatVC = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "chatVC") as! ChatScreenViewController
         
         self.navigationController?.pushViewController(chatVC, animated: true)
     }

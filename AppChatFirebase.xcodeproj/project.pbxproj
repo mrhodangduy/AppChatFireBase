@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		44495357EC9CE487AFB3DE8B /* Pods_AppChatFirebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B91D94125792D82EF65DA5B /* Pods_AppChatFirebase.framework */; };
+		635344881F68E58C00FE32D7 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635344871F68E58C00FE32D7 /* SearchViewController.swift */; };
+		6353448B1F68E77E00FE32D7 /* CoffeePin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635344891F68E77E00FE32D7 /* CoffeePin.swift */; };
+		6353448C1F68E77E00FE32D7 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6353448A1F68E77E00FE32D7 /* SwiftyJSON.swift */; };
 		6362901C1F6639A500134C29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362901B1F6639A500134C29 /* AppDelegate.swift */; };
 		6362901E1F6639A500134C29 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362901D1F6639A500134C29 /* SplashVC.swift */; };
 		636290211F6639A500134C29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6362901F1F6639A500134C29 /* Main.storyboard */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		4B91D94125792D82EF65DA5B /* Pods_AppChatFirebase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AppChatFirebase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		635344871F68E58C00FE32D7 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		635344891F68E77E00FE32D7 /* CoffeePin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoffeePin.swift; sourceTree = "<group>"; };
+		6353448A1F68E77E00FE32D7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		636290181F6639A500134C29 /* AppChatFirebase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppChatFirebase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6362901B1F6639A500134C29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6362901D1F6639A500134C29 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
@@ -136,6 +142,8 @@
 			children = (
 				636290401F66498C00134C29 /* Extentions.swift */,
 				63EC85FD1F66739B00344E46 /* Users.swift */,
+				635344891F68E77E00FE32D7 /* CoffeePin.swift */,
+				6353448A1F68E77E00FE32D7 /* SwiftyJSON.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 				6362903E1F66466800134C29 /* ChatScreenViewController.swift */,
 				636290441F666F0400134C29 /* Navi_ViewController.swift */,
 				637460FE1F67D1B100E546D1 /* Chat_ViewController.swift */,
+				635344871F68E58C00FE32D7 /* SearchViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -324,15 +333,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				637460FF1F67D1B100E546D1 /* Chat_ViewController.swift in Sources */,
+				6353448B1F68E77E00FE32D7 /* CoffeePin.swift in Sources */,
 				636290451F666F0400134C29 /* Navi_ViewController.swift in Sources */,
 				63EC86011F66751100344E46 /* ListFriends_TableViewCell.swift in Sources */,
 				6362903F1F66466800134C29 /* ChatScreenViewController.swift in Sources */,
+				635344881F68E58C00FE32D7 /* SearchViewController.swift in Sources */,
 				636290391F66464D00134C29 /* SignInViewController.swift in Sources */,
 				636290311F66406400134C29 /* RoundButton.swift in Sources */,
 				636290411F66498C00134C29 /* Extentions.swift in Sources */,
 				63EC86031F6694B800344E46 /* Visitor_TableViewCell.swift in Sources */,
 				6362903B1F66465600134C29 /* SignUpViewController.swift in Sources */,
 				63EC86051F6694C900344E46 /* Own_TableViewCell.swift in Sources */,
+				6353448C1F68E77E00FE32D7 /* SwiftyJSON.swift in Sources */,
 				636290341F66406400134C29 /* RoundView.swift in Sources */,
 				636290331F66406400134C29 /* RoundTextView.swift in Sources */,
 				63EC86071F66973300344E46 /* RoundTextFiled.swift in Sources */,
@@ -466,7 +478,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ETFZ2326V8;
 				INFOPLIST_FILE = AppChatFirebase/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.detest.qtsvn.paul.AppChatFirebase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -482,7 +494,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ETFZ2326V8;
 				INFOPLIST_FILE = AppChatFirebase/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.detest.qtsvn.paul.AppChatFirebase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
